@@ -1,59 +1,34 @@
-import React, { useState } from 'react'
-import { handleError } from '../utils';
+import React, { useState } from 'react';
 
 function ExpenseForm({ addTransaction }) {
+  const [formData, setFormData] = useState({
+    amount: '',
+    description: '',
+    date: '',
+  });
 
-    const [expenseInfo, setExpenseInfo] = useState({
-        amount: '',
-        text: ''
-    })
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        const copyExpenseInfo = { ...expenseInfo };
-        copyExpenseInfo[name] = value;
-        setExpenseInfo(copyExpenseInfo);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      ...formData,
+      amount: parseFloat(formData.amount),
+    };
+    console.log('Submitting:', data);
+    addTransaction(data);
+  };
 
-    const addExpenses = (e) => {
-        e.preventDefault();
-        const { amount, text } = expenseInfo;
-        if (!amount || !text) {
-            handleError('Please add Expense Details');
-            return;
-        }
-        addTransaction(expenseInfo);
-        setExpenseInfo({ amount: '', text: '' })
-    }
-
-    return (
-        <div className='container'>
-            <h1>Expense Tracker</h1>
-            <form onSubmit={addExpenses}>
-                <div>
-                    <label htmlFor='text'>Expense Detail</label>
-                    <input
-                        onChange={handleChange}
-                        type='text'
-                        name='text'
-                        placeholder='Enter your Expense Detail...'
-                        value={expenseInfo.text}
-                    />
-                </div>
-                <div>
-                    <label htmlFor='amount'>Amount</label>
-                    <input
-                        onChange={handleChange}
-                        type='number'
-                        name='amount'
-                        placeholder='Enter your Amount...'
-                        value={expenseInfo.amount}
-                    />
-                </div>
-                <button type='submit'>Add Expense</button>
-            </form>
-        </div>
-    )
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="number" name="amount" value={formData.amount} onChange={handleChange} placeholder="Amount" required />
+      <input type="text" name="description" value={formData.description} onChange={handleChange} placeholder="Description" required />
+      <input type="date" name="date" value={formData.date} onChange={handleChange} required />
+      <button type="submit">Add Transaction</button>
+    </form>
+  );
 }
 
-export default ExpenseForm
+export default ExpenseForm;

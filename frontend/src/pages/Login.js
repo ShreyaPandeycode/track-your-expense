@@ -63,21 +63,23 @@ function Login() {
                 <div>
                     <label htmlFor='email'>Email</label>
                     <input
-                        onChange={handleChange}
-                        type='email'
-                        name='email'
-                        placeholder='Enter your email...'
-                        value={loginInfo.email}
+                     type="email"
+  name="email"
+  placeholder="Enter your email..."
+  value={loginInfo.email}
+  onChange={handleChange}
+  autoComplete="off"   
                     />
                 </div>
                 <div>
                     <label htmlFor='password'>Password</label>
                     <input
-                        onChange={handleChange}
-                        type='password'
-                        name='password'
-                        placeholder='Enter your password...'
-                        value={loginInfo.password}
+                       type="password"
+  name="password"
+  placeholder="Enter your password..."
+  value={loginInfo.password}
+  onChange={handleChange}
+  autoComplete="new-password"  
                     />
                 </div>
                 <button type='submit'>Login</button>

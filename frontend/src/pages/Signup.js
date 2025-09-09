@@ -71,21 +71,23 @@ function Signup() {
                 <div>
                     <label htmlFor='email'>Email</label>
                     <input
-                        onChange={handleChange}
-                        type='email'
-                        name='email'
-                        placeholder='Enter your email...'
-                        value={signupInfo.email}
+                      type="email"
+  name="email"
+  placeholder="Enter your email..."
+  value={signupInfo.email}
+  onChange={handleChange}
+  autoComplete="off"   // 🚫 stops browser autofill
                     />
                 </div>
                 <div>
                     <label htmlFor='password'>Password</label>
                     <input
-                        onChange={handleChange}
-                        type='password'
-                        name='password'
-                        placeholder='Enter your password...'
-                        value={signupInfo.password}
+                        type="password"
+  name="password"
+  placeholder="Enter your password..."
+  value={signupInfo.password}
+  onChange={handleChange}
+  autoComplete="new-password"  // 🚫 prevents password autofill suggestions
                     />
                 </div>
                 <button type='submit'>Signup</button>
